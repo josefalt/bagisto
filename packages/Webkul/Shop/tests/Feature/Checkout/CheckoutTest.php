@@ -468,6 +468,14 @@ it('should store the billing address for non stockable items for guest user', fu
         ->assertJsonPath('data.payment_methods.2.method_title', 'PayPal Standard')
         ->assertJsonPath('data.payment_methods.2.description', 'PayPal Standard')
         ->assertJsonPath('data.payment_methods.2.sort', 3)
+        ->assertJsonPath('data.payment_methods.3.method', 'pagbank_smart_button')
+        ->assertJsonPath('data.payment_methods.3.method_title', 'PagBank Smart Button')
+        ->assertJsonPath('data.payment_methods.3.description', 'PagBank')
+        ->assertJsonPath('data.payment_methods.3.sort', 4)
+        ->assertJsonPath('data.payment_methods.4.method', 'pagbank_standard')
+        ->assertJsonPath('data.payment_methods.4.method_title', 'PagBank Standard')
+        ->assertJsonPath('data.payment_methods.4.description', 'PagBank Standard')
+        ->assertJsonPath('data.payment_methods.4.sort', 5)
         ->assertJsonPath('redirect', false);
 
     $this->assertModelWise([
@@ -796,6 +804,14 @@ it('should store the billing address for non stockable items for customer', func
         ->assertJsonPath('data.payment_methods.2.method_title', 'PayPal Standard')
         ->assertJsonPath('data.payment_methods.2.description', 'PayPal Standard')
         ->assertJsonPath('data.payment_methods.2.sort', 3)
+        ->assertJsonPath('data.payment_methods.3.method', 'pagbank_smart_button')
+        ->assertJsonPath('data.payment_methods.3.method_title', 'PagBank Smart Button')
+        ->assertJsonPath('data.payment_methods.3.description', 'PagBank')
+        ->assertJsonPath('data.payment_methods.3.sort', 4)
+        ->assertJsonPath('data.payment_methods.4.method', 'pagbank_standard')
+        ->assertJsonPath('data.payment_methods.4.method_title', 'PagBank Standard')
+        ->assertJsonPath('data.payment_methods.4.description', 'PagBank Standard')
+        ->assertJsonPath('data.payment_methods.4.sort', 5)
         ->assertJsonPath('redirect', false);
 
     $this->assertModelWise([
@@ -1185,7 +1201,15 @@ it('should store the shipping method for guest user', function () {
         ->assertJsonPath('payment_methods.3.method', 'paypal_standard')
         ->assertJsonPath('payment_methods.3.method_title', 'PayPal Standard')
         ->assertJsonPath('payment_methods.3.description', 'PayPal Standard')
-        ->assertJsonPath('payment_methods.3.sort', 3);
+        ->assertJsonPath('payment_methods.3.sort', 3)
+        ->assertJsonPath('payment_methods.4.method', 'pagbank_standard')
+        ->assertJsonPath('payment_methods.4.method_title', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.4.description', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.4.sort', 4)
+        ->assertJsonPath('payment_methods.5.method', 'pagbank_smart_button')
+        ->assertJsonPath('payment_methods.5.method_title', 'PagBank Smart Button')
+        ->assertJsonPath('payment_methods.5.description', 'PagBank')
+        ->assertJsonPath('payment_methods.5.sort', 5);
 });
 
 it('should store the shipping method for customer', function () {
@@ -1275,7 +1299,15 @@ it('should store the shipping method for customer', function () {
         ->assertJsonPath('payment_methods.3.method', 'paypal_standard')
         ->assertJsonPath('payment_methods.3.method_title', 'PayPal Standard')
         ->assertJsonPath('payment_methods.3.description', 'PayPal Standard')
-        ->assertJsonPath('payment_methods.3.sort', 3);
+        ->assertJsonPath('payment_methods.3.sort', 3)
+        ->assertJsonPath('payment_methods.4.method', 'pagbank_standard')
+        ->assertJsonPath('payment_methods.4.method_title', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.4.description', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.4.sort', 4)
+        ->assertJsonPath('payment_methods.5.method', 'pagbank_smart_button')
+        ->assertJsonPath('payment_methods.5.method_title', 'PagBank Smart Button')
+        ->assertJsonPath('payment_methods.5.description', 'PagBank')
+        ->assertJsonPath('payment_methods.5.sort', 5);
 });
 
 it('should fails the validation error when store the payment method for guest user', function () {

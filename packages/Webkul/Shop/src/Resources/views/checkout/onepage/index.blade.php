@@ -118,6 +118,15 @@
                                 {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                             </template>
 
+                            <template v-if="cart.payment_method == 'pagbank_smart_button'">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.pagbank_smart_button.before') !!}
+
+                                <!-- PagBank Smart Button Vue Component -->
+                                <v-pagbank-smart-button></v-pagbank-smart-button>
+
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.pagbank_smart_button.after') !!}
+                            </template>
+
                             <template v-else>
                                 <x-shop::button
                                     type="button"
@@ -146,7 +155,7 @@
                             prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
 
                             subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
-                            
+
                             shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
