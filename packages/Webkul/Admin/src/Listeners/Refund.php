@@ -3,7 +3,8 @@
 namespace Webkul\Admin\Listeners;
 
 use Webkul\Admin\Mail\Order\RefundedNotification;
-use Webkul\Paypal\Payment\SmartButton;
+use Webkul\PagBank\Payment\SmartButton as PagBankSmartButton;
+use Webkul\Paypal\Payment\SmartButton as PayPalSmartButton;
 
 class Refund extends Base
 {
@@ -37,16 +38,14 @@ class Refund extends Base
     public function refundOrder($refund)
     {
         $order = $refund->order;
+        $smartButton = $this->getSmartButton($order->payment->method);
 
-        if ($order->payment->method === 'paypal_smart_button') {
-            /* getting smart button instance */
-            $smartButton = new SmartButton;
+        if (isset($smartButton)) {
+            /* getting oder id */
+            $orderID = $order->payment->additional['orderID'];
 
-            /* getting paypal oder id */
-            $paypalOrderID = $order->payment->additional['orderID'];
-
-            /* getting capture id by paypal order id */
-            $captureID = $smartButton->getCaptureId($paypalOrderID);
+            /* getting capture id by order id */
+            $captureID = $smartButton->getCaptureId($orderID);
 
             /* now refunding order on the basis of capture id and refund data */
             $smartButton->refundOrder($captureID, [
@@ -56,5 +55,24 @@ class Refund extends Base
                 ],
             ]);
         }
+    }
+
+    /**
+     * Getting smart button instance
+     *
+     * @param  \Webkul\Sales\Contracts\Refund  $method
+     * @return null|PayPalSmartButton|PagBankSmartButton
+     */
+    private function getSmartButton($method)
+    {
+        $smartButton = null;
+
+        if ($method === 'paypal_smart_button') {
+            $smartButton = new PayPalSmartButton;
+        } else if ($method === 'pagbank_smart_button') {
+            $smartButton = new PagBankSmartButton;
+        }
+
+        return $smartButton;
     }
 }

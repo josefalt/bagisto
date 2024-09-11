@@ -112,7 +112,7 @@ abstract class Payment
     }
 
     /**
-     * Return paypal redirect url.
+     * Return payment redirect url.
      *
      * @var \Illuminate\Database\Eloquent\Collection
      */

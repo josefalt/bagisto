@@ -654,7 +654,15 @@ it('should the shipping rates after storing address', function () {
         ->assertJsonPath('payment_methods.3.method', 'paypal_standard')
         ->assertJsonPath('payment_methods.3.method_title', 'PayPal Standard')
         ->assertJsonPath('payment_methods.3.description', 'PayPal Standard')
-        ->assertJsonPath('payment_methods.3.sort', 3);
+        ->assertJsonPath('payment_methods.3.sort', 3)
+        ->assertJsonPath('payment_methods.4.method', 'pagbank_smart_button')
+        ->assertJsonPath('payment_methods.4.method_title', 'PagBank Smart Button')
+        ->assertJsonPath('payment_methods.4.description', 'PagBank')
+        ->assertJsonPath('payment_methods.4.sort', 4)
+        ->assertJsonPath('payment_methods.5.method', 'pagbank_standard')
+        ->assertJsonPath('payment_methods.5.method_title', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.5.description', 'PagBank Standard')
+        ->assertJsonPath('payment_methods.5.sort', 5);
 });
 
 it('should store the payment method after storing the shipping method', function () {
